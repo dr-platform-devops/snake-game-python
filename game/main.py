@@ -21,7 +21,7 @@ screen.onkey(snake.up, "Up")
 screen.onkey(snake.down, "Down")
 screen.onkey(snake.right, "Right")
 screen.onkey(snake.left, "Left")
-threshold = 280
+threshold = 290
 
 scoreboard = Scoreboard()
 
@@ -37,13 +37,15 @@ while playing:
         scoreboard.news_core()
 
     if snake.head.xcor() > threshold or snake.head.xcor() < -threshold or snake.head.ycor() < -threshold or snake.head.ycor() > threshold:
-        scoreboard.game_over()
-        playing = False
+        scoreboard.reset()
+        snake.reset()
+        time.sleep(2)
 
     for segments in snake.segments[1:len(snake.segments)]:
         if snake.head.distance(segments) < 10:
-            playing = False
-            scoreboard.game_over()
+            scoreboard.reset()
+            snake.reset()
+            time.sleep(2)
 
 print(f"The game ended, your score is {scoreboard.score}")
 
